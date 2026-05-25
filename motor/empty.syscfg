@@ -1,0 +1,87 @@
+/**
+ * These arguments were used when this file was generated. They will be automatically applied on subsequent loads
+ * via the GUI or CLI. Run CLI with '--help' for additional information on how to override these arguments.
+ * @cliArgs --board "/ti/boards/LP_MSPM0G3507" --product "mspm0_sdk@1.30.00.03"
+ * @versions {"tool":"1.19.0+3426"}
+ */
+
+/**
+ * Import the modules used in this configuration.
+ */
+const Board   = scripting.addModule("/ti/driverlib/Board");
+const GPIO    = scripting.addModule("/ti/driverlib/GPIO", {}, false);
+const GPIO1   = GPIO.addInstance();
+const GPIO2   = GPIO.addInstance();
+const PWM     = scripting.addModule("/ti/driverlib/PWM", {}, false);
+const PWM1    = PWM.addInstance();
+const PWM2    = PWM.addInstance();
+const SYSTICK = scripting.addModule("/ti/driverlib/SYSTICK");
+const UART    = scripting.addModule("/ti/driverlib/UART", {}, false);
+const UART1   = UART.addInstance();
+
+/**
+ * Write custom configuration values to the imported modules.
+ */
+
+GPIO1.$name                         = "IN2";
+GPIO1.port                          = "PORTB";
+GPIO1.associatedPins[0].$name       = "IN2_PIN_0";
+GPIO1.associatedPins[0].pin.$assign = "boosterpack.23";
+
+GPIO2.$name                         = "IN4";
+GPIO2.port                          = "PORTB";
+GPIO2.associatedPins[0].$name       = "IN4_PIN_0";
+GPIO2.associatedPins[0].pin.$assign = "boosterpack.14";
+
+PWM1.clockDivider                       = 8;
+PWM1.timerStartTimer                    = true;
+PWM1.ccIndex                            = [0];
+PWM1.$name                              = "PWM_MOTOR1";
+PWM1.timerCount                         = 40000;
+PWM1.peripheral.$assign                 = "TIMG12";
+PWM1.peripheral.ccp0Pin.$assign         = "boosterpack.36";
+PWM1.PWM_CHANNEL_0.$name                = "ti_driverlib_pwm_PWMTimerCC0";
+PWM1.ccp0PinConfig.direction            = scripting.forceWrite("OUTPUT");
+PWM1.ccp0PinConfig.hideOutputInversion  = scripting.forceWrite(false);
+PWM1.ccp0PinConfig.onlyInternalResistor = scripting.forceWrite(false);
+PWM1.ccp0PinConfig.passedPeripheralType = scripting.forceWrite("Digital");
+PWM1.ccp0PinConfig.$name                = "ti_driverlib_gpio_GPIOPinGeneric2";
+
+PWM2.$name                      = "PWM_MOTOR2";
+PWM2.clockDivider               = 8;
+PWM2.timerStartTimer            = true;
+PWM2.clockPrescale              = 8;
+PWM2.timerCount                 = 10000;
+PWM2.ccIndex                    = [0,1,2,3];
+PWM2.peripheral.$assign         = "TIMA0";
+PWM2.peripheral.ccp0Pin.$assign = "j17_expansion.8";
+PWM2.peripheral.ccp1Pin.$assign = "boosterpack.24";
+PWM2.peripheral.ccp2Pin.$assign = "boosterpack.30";
+PWM2.peripheral.ccp3Pin.$assign = "boosterpack.28";
+PWM2.PWM_CHANNEL_0.$name        = "ti_driverlib_pwm_PWMTimerCC1";
+PWM2.PWM_CHANNEL_1.$name        = "ti_driverlib_pwm_PWMTimerCC2";
+PWM2.PWM_CHANNEL_2.$name        = "ti_driverlib_pwm_PWMTimerCC3";
+PWM2.PWM_CHANNEL_3.$name        = "ti_driverlib_pwm_PWMTimerCC4";
+PWM2.ccp0PinConfig.$name        = "ti_driverlib_gpio_GPIOPinGeneric3";
+PWM2.ccp1PinConfig.$name        = "ti_driverlib_gpio_GPIOPinGeneric4";
+PWM2.ccp2PinConfig.$name        = "ti_driverlib_gpio_GPIOPinGeneric5";
+PWM2.ccp3PinConfig.$name        = "ti_driverlib_gpio_GPIOPinGeneric6";
+
+const SYSCTL = scripting.addModule("/ti/driverlib/SYSCTL", {}, false);
+
+UART1.$name             = "UART_0";
+UART1.txPinConfig.$name = "ti_driverlib_gpio_GPIOPinGeneric0";
+UART1.rxPinConfig.$name = "ti_driverlib_gpio_GPIOPinGeneric1";
+
+/**
+ * Pinmux solution for unlocked pins/peripherals. This ensures that minor changes to the automatic solver in a future
+ * version of the tool will not impact the pinmux you originally saw.  These lines can be completely deleted in order to
+ * re-solve from scratch.
+ */
+Board.peripheral.$suggestSolution          = "DEBUGSS";
+Board.peripheral.swclkPin.$suggestSolution = "j25_expansion.16";
+Board.peripheral.swdioPin.$suggestSolution = "j25_expansion.14";
+SYSCTL.peripheral.$suggestSolution         = "SYSCTL";
+UART1.peripheral.$suggestSolution          = "UART0";
+UART1.peripheral.rxPin.$suggestSolution    = "j17_expansion.9";
+UART1.peripheral.txPin.$suggestSolution    = "j19_expansion.9";

@@ -1,10 +1,3 @@
-# TI SDK driverlib (provided by SDK installation)
-ti/
-
-# Sub-project references
-motor/
-voice/
-
 # Build outputs
 keil/Listings/
 keil/Objects/
@@ -16,8 +9,3 @@ keil/*.uvoptx
 # Generated/temp files
 *.bat
 Event.dot
-device_linker.cmd
-device_linker.lds
-device.cmd.genlibs
-device.lds.genlibs
-device.opt

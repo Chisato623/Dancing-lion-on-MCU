@@ -1,0 +1,23 @@
+# TI SDK driverlib (provided by SDK installation)
+ti/
+
+# Sub-project references
+motor/
+voice/
+
+# Build outputs
+keil/Listings/
+keil/Objects/
+
+# IDE user-specific files
+keil/*.uvguix.*
+keil/*.uvoptx
+
+# Generated/temp files
+*.bat
+Event.dot
+device_linker.cmd
+device_linker.lds
+device.cmd.genlibs
+device.lds.genlibs
+device.opt

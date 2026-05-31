@@ -135,14 +135,34 @@ SYSCONFIG_WEAK void SYSCFG_DL_GPIO_init(void)
     DL_GPIO_initPeripheralInputFunction(
         GPIO_UART_0_IOMUX_RX, GPIO_UART_0_IOMUX_RX_FUNC);
 
-    DL_GPIO_initDigitalOutput(GPIO_LED_IOMUX);
-
     DL_GPIO_initDigitalOutput(IN2_IN2_PIN_0_IOMUX);
 
     DL_GPIO_initDigitalOutput(IN4_IN4_PIN_0_IOMUX);
 
+    DL_GPIO_initDigitalOutput(GPIO_LED_IOMUX);
+
+    DL_GPIO_initDigitalOutput(GPIO_SCL_IOMUX);
+
+    DL_GPIO_initDigitalOutput(GPIO_SDA_IOMUX);
+
+    DL_GPIO_initDigitalOutput(GPIO_RES_IOMUX);
+
+    DL_GPIO_initDigitalOutput(GPIO_DC_IOMUX);
+
+    DL_GPIO_initDigitalOutput(GPIO_CS_IOMUX);
+
+    DL_GPIO_clearPins(GPIO_PORT, GPIO_SCL_PIN |
+		GPIO_SDA_PIN |
+		GPIO_RES_PIN |
+		GPIO_DC_PIN |
+		GPIO_CS_PIN);
     DL_GPIO_setPins(GPIO_PORT, GPIO_LED_PIN);
-    DL_GPIO_enableOutput(GPIO_PORT, GPIO_LED_PIN);
+    DL_GPIO_enableOutput(GPIO_PORT, GPIO_LED_PIN |
+		GPIO_SCL_PIN |
+		GPIO_SDA_PIN |
+		GPIO_RES_PIN |
+		GPIO_DC_PIN |
+		GPIO_CS_PIN);
     DL_GPIO_clearPins(GPIOB, IN2_IN2_PIN_0_PIN |
 		IN4_IN4_PIN_0_PIN);
     DL_GPIO_enableOutput(GPIOB, IN2_IN2_PIN_0_PIN |

@@ -11,19 +11,24 @@
 
 | 引脚 | 功能 | 外设实例 | 说明 |
 |------|------|----------|------|
-| **PA12** | GPIO (输出, 初始高) | `GPIO` | LED 指示灯 |
 | **PA0** | UART TX | `UART_0` (UART0) | 串口发送 (MFCLK) |
 | **PA1** | UART RX | `UART_0` (UART0) | 串口接收 |
-| **PA28** | I2C SDA | `I2C_0` (I2C0) | 语音模块 数据线 |
-| **PA31** | I2C SCL | `I2C_0` (I2C0) | 语音模块 时钟线 |
+| **PA6** | GPIO (输出) | `GPIO` | OLED CS 片选 |
+| **PA12** | GPIO (输出, 初始高) | `GPIO` | LED 指示灯 |
 | **PA15** | PWM CCP2 | `PWM_MOTOR2` (TIMA0) | 电机2 CH2 |
 | **PA17** | PWM CCP3 | `PWM_MOTOR2` (TIMA0) | 电机2 CH3 |
+| **PA19** | SWDIO | DEBUGSS | 调试数据 |
+| **PA20** | SWCLK | DEBUGSS | 调试时钟 |
 | **PA21** | PWM CCP0 | `PWM_MOTOR2` (TIMA0) | 电机2 CH0 |
 | **PA22** | PWM CCP1 | `PWM_MOTOR2` (TIMA0) | 电机2 CH1 |
+| **PA24** | GPIO (输出) | `GPIO` | OLED DC 数据/命令选择 |
+| **PA25** | GPIO (输出) | `GPIO` | OLED RES 复位 |
+| **PA26** | GPIO (输出) | `GPIO` | OLED SDA SPI数据 (软件模拟) |
+| **PA27** | GPIO (输出) | `GPIO` | OLED SCL SPI时钟 (软件模拟) |
+| **PA28** | I2C SDA | `I2C_0` (I2C0) | 语音模块 数据线 |
+| **PA31** | I2C SCL | `I2C_0` (I2C0) | 语音模块 时钟线 |
 | **PB7** | GPIO (输出) | `IN4` | 方向控制 IN4 |
 | **PB19** | GPIO (输出) | `IN2` | 方向控制 IN2 |
 | **PB20** | PWM CCP0 | `PWM_MOTOR1` (TIMG12) | 电机1 CH0 |
-| **PA19** | SWDIO | DEBUGSS | 调试数据 |
-| **PA20** | SWCLK | DEBUGSS | 调试时钟 |
 
 ## 后续开发目标：实现播放音乐，OLED屏幕显示等功能

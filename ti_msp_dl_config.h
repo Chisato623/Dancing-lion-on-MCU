@@ -128,13 +128,13 @@ extern "C" {
 #define I2C_0_INST_INT_IRQN                                        I2C0_INT_IRQn
 #define I2C_0_BUS_SPEED_HZ                                                100000
 #define GPIO_I2C_0_SDA_PORT                                                GPIOA
-#define GPIO_I2C_0_SDA_PIN                                         DL_GPIO_PIN_0
-#define GPIO_I2C_0_IOMUX_SDA                                      (IOMUX_PINCM1)
-#define GPIO_I2C_0_IOMUX_SDA_FUNC                       IOMUX_PINCM1_PF_I2C0_SDA
+#define GPIO_I2C_0_SDA_PIN                                        DL_GPIO_PIN_28
+#define GPIO_I2C_0_IOMUX_SDA                                      (IOMUX_PINCM3)
+#define GPIO_I2C_0_IOMUX_SDA_FUNC                       IOMUX_PINCM3_PF_I2C0_SDA
 #define GPIO_I2C_0_SCL_PORT                                                GPIOA
-#define GPIO_I2C_0_SCL_PIN                                         DL_GPIO_PIN_1
-#define GPIO_I2C_0_IOMUX_SCL                                      (IOMUX_PINCM2)
-#define GPIO_I2C_0_IOMUX_SCL_FUNC                       IOMUX_PINCM2_PF_I2C0_SCL
+#define GPIO_I2C_0_SCL_PIN                                        DL_GPIO_PIN_31
+#define GPIO_I2C_0_IOMUX_SCL                                      (IOMUX_PINCM6)
+#define GPIO_I2C_0_IOMUX_SCL_FUNC                       IOMUX_PINCM6_PF_I2C0_SCL
 
 
 /* Defines for UART_0 */
@@ -143,12 +143,12 @@ extern "C" {
 #define UART_0_INST_INT_IRQN                                      UART0_INT_IRQn
 #define GPIO_UART_0_RX_PORT                                                GPIOA
 #define GPIO_UART_0_TX_PORT                                                GPIOA
-#define GPIO_UART_0_RX_PIN                                        DL_GPIO_PIN_11
-#define GPIO_UART_0_TX_PIN                                        DL_GPIO_PIN_10
-#define GPIO_UART_0_IOMUX_RX                                     (IOMUX_PINCM22)
-#define GPIO_UART_0_IOMUX_TX                                     (IOMUX_PINCM21)
-#define GPIO_UART_0_IOMUX_RX_FUNC                      IOMUX_PINCM22_PF_UART0_RX
-#define GPIO_UART_0_IOMUX_TX_FUNC                      IOMUX_PINCM21_PF_UART0_TX
+#define GPIO_UART_0_RX_PIN                                         DL_GPIO_PIN_1
+#define GPIO_UART_0_TX_PIN                                         DL_GPIO_PIN_0
+#define GPIO_UART_0_IOMUX_RX                                      (IOMUX_PINCM2)
+#define GPIO_UART_0_IOMUX_TX                                      (IOMUX_PINCM1)
+#define GPIO_UART_0_IOMUX_RX_FUNC                       IOMUX_PINCM2_PF_UART0_RX
+#define GPIO_UART_0_IOMUX_TX_FUNC                       IOMUX_PINCM1_PF_UART0_TX
 #define UART_0_BAUD_RATE                                                  (9600)
 #define UART_0_IBRD_4_MHZ_9600_BAUD                                         (26)
 #define UART_0_FBRD_4_MHZ_9600_BAUD                                          (3)
@@ -157,12 +157,6 @@ extern "C" {
 
 
 
-/* Port definition for Pin Group GPIO */
-#define GPIO_PORT                                                        (GPIOA)
-
-/* Defines for LED: GPIOA.12 with pinCMx 34 on package pin 5 */
-#define GPIO_LED_PIN                                            (DL_GPIO_PIN_12)
-#define GPIO_LED_IOMUX                                           (IOMUX_PINCM34)
 /* Port definition for Pin Group IN2 */
 #define IN2_PORT                                                         (GPIOB)
 
@@ -175,6 +169,27 @@ extern "C" {
 /* Defines for IN4_PIN_0: GPIOB.7 with pinCMx 24 on package pin 59 */
 #define IN4_IN4_PIN_0_PIN                                        (DL_GPIO_PIN_7)
 #define IN4_IN4_PIN_0_IOMUX                                      (IOMUX_PINCM24)
+/* Port definition for Pin Group GPIO */
+#define GPIO_PORT                                                        (GPIOA)
+
+/* Defines for LED: GPIOA.12 with pinCMx 34 on package pin 5 */
+#define GPIO_LED_PIN                                            (DL_GPIO_PIN_12)
+#define GPIO_LED_IOMUX                                           (IOMUX_PINCM34)
+/* Defines for SCL: GPIOA.27 with pinCMx 60 on package pin 31 */
+#define GPIO_SCL_PIN                                            (DL_GPIO_PIN_27)
+#define GPIO_SCL_IOMUX                                           (IOMUX_PINCM60)
+/* Defines for SDA: GPIOA.26 with pinCMx 59 on package pin 30 */
+#define GPIO_SDA_PIN                                            (DL_GPIO_PIN_26)
+#define GPIO_SDA_IOMUX                                           (IOMUX_PINCM59)
+/* Defines for RES: GPIOA.25 with pinCMx 55 on package pin 26 */
+#define GPIO_RES_PIN                                            (DL_GPIO_PIN_25)
+#define GPIO_RES_IOMUX                                           (IOMUX_PINCM55)
+/* Defines for DC: GPIOA.24 with pinCMx 54 on package pin 25 */
+#define GPIO_DC_PIN                                             (DL_GPIO_PIN_24)
+#define GPIO_DC_IOMUX                                            (IOMUX_PINCM54)
+/* Defines for CS: GPIOA.6 with pinCMx 11 on package pin 46 */
+#define GPIO_CS_PIN                                              (DL_GPIO_PIN_6)
+#define GPIO_CS_IOMUX                                            (IOMUX_PINCM11)
 
 
 

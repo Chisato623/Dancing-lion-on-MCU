@@ -16,7 +16,7 @@
 #define u32 uint32_t
 #endif
 
-//-----------------OLED∂Àø⁄∂®“Â---------------- 
+//-----------------OLEDÁ´ØÂè£ÂÆö‰πâ---------------- 
 
 #define OLED_SCL_Clr() DL_GPIO_clearPins(GPIO_PORT,GPIO_SCL_PIN)//SCL=SCLK
 #define OLED_SCL_Set() DL_GPIO_setPins(GPIO_PORT,GPIO_SCL_PIN)
@@ -34,8 +34,8 @@
 #define OLED_CS_Set()   DL_GPIO_setPins(GPIO_PORT,GPIO_CS_PIN)
 
 
-#define OLED_CMD  0	//–¥√¸¡Ó
-#define OLED_DATA 1	//–¥ ˝æ›
+#define OLED_CMD  0	//ÂÜôÂëΩ‰ª§
+#define OLED_DATA 1	//ÂÜôÊï∞ÊçÆ
 
 void OLED_ClearPoint(u8 x,u8 y);
 void OLED_ColorTurn(u8 i);
@@ -56,6 +56,7 @@ void OLED_ShowChinese(u8 x,u8 y,u8 num,u8 size1,u8 mode);
 void OLED_ScrollDisplay(u8 num,u8 space,u8 mode);
 void OLED_ShowPicture(u8 x,u8 y,u8 sizex,u8 sizey,u8 BMP[],u8 mode);
 void OLED_Init(void);
+void OLED_WelcomeDraw(void);
+void OLED_SmileDraw(void);
 
 #endif
-

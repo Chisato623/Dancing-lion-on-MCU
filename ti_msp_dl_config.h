@@ -172,24 +172,36 @@ extern "C" {
 /* Port definition for Pin Group GPIO */
 #define GPIO_PORT                                                        (GPIOA)
 
-/* Defines for LED: GPIOA.12 with pinCMx 34 on package pin 5 */
-#define GPIO_LED_PIN                                            (DL_GPIO_PIN_12)
-#define GPIO_LED_IOMUX                                           (IOMUX_PINCM34)
+/* Defines for LED: GPIOA.14 with pinCMx 36 on package pin 7 */
+#define GPIO_LED_PIN                                            (DL_GPIO_PIN_14)
+#define GPIO_LED_IOMUX                                           (IOMUX_PINCM36)
+/* Port definition for Pin Group LCD */
+#define LCD_PORT                                                         (GPIOA)
+
 /* Defines for SCL: GPIOA.27 with pinCMx 60 on package pin 31 */
-#define GPIO_SCL_PIN                                            (DL_GPIO_PIN_27)
-#define GPIO_SCL_IOMUX                                           (IOMUX_PINCM60)
+#define LCD_SCL_PIN                                             (DL_GPIO_PIN_27)
+#define LCD_SCL_IOMUX                                            (IOMUX_PINCM60)
 /* Defines for SDA: GPIOA.26 with pinCMx 59 on package pin 30 */
-#define GPIO_SDA_PIN                                            (DL_GPIO_PIN_26)
-#define GPIO_SDA_IOMUX                                           (IOMUX_PINCM59)
+#define LCD_SDA_PIN                                             (DL_GPIO_PIN_26)
+#define LCD_SDA_IOMUX                                            (IOMUX_PINCM59)
 /* Defines for RES: GPIOA.25 with pinCMx 55 on package pin 26 */
-#define GPIO_RES_PIN                                            (DL_GPIO_PIN_25)
-#define GPIO_RES_IOMUX                                           (IOMUX_PINCM55)
+#define LCD_RES_PIN                                             (DL_GPIO_PIN_25)
+#define LCD_RES_IOMUX                                            (IOMUX_PINCM55)
 /* Defines for DC: GPIOA.24 with pinCMx 54 on package pin 25 */
-#define GPIO_DC_PIN                                             (DL_GPIO_PIN_24)
-#define GPIO_DC_IOMUX                                            (IOMUX_PINCM54)
-/* Defines for CS: GPIOA.6 with pinCMx 11 on package pin 46 */
-#define GPIO_CS_PIN                                              (DL_GPIO_PIN_6)
-#define GPIO_CS_IOMUX                                            (IOMUX_PINCM11)
+#define LCD_DC_PIN                                              (DL_GPIO_PIN_24)
+#define LCD_DC_IOMUX                                             (IOMUX_PINCM54)
+/* Defines for CS2: GPIOA.18 with pinCMx 40 on package pin 11 */
+#define LCD_CS2_PIN                                             (DL_GPIO_PIN_18)
+#define LCD_CS2_IOMUX                                            (IOMUX_PINCM40)
+/* Defines for CS1: GPIOA.16 with pinCMx 38 on package pin 9 */
+#define LCD_CS1_PIN                                             (DL_GPIO_PIN_16)
+#define LCD_CS1_IOMUX                                            (IOMUX_PINCM38)
+/* Defines for FSO: GPIOA.13 with pinCMx 35 on package pin 6 */
+#define LCD_FSO_PIN                                             (DL_GPIO_PIN_13)
+#define LCD_FSO_IOMUX                                            (IOMUX_PINCM35)
+/* Defines for BLK: GPIOA.12 with pinCMx 34 on package pin 5 */
+#define LCD_BLK_PIN                                             (DL_GPIO_PIN_12)
+#define LCD_BLK_IOMUX                                            (IOMUX_PINCM34)
 
 
 

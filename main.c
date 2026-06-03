@@ -4,6 +4,8 @@
 #include "voice.h"
 #include "led.h"
 #include "motor.h"
+#include "BSP/LCD/lcd.h"
+#include "BSP/LCD/lcd_init.h"
 
 /* ================================================================
  *  Action state machine
@@ -101,6 +103,10 @@ int main(void)
 
     board_init();
 
+    /* LCD init & welcome screen */
+    LCD_Init();
+    LCD_DrawWelcome();
+
     Voice_Init();
     printf("[Voice] CI1302 voice module initialized\r\n");
 
@@ -146,6 +152,15 @@ int main(void)
             break;
         case ACTION_NONE:
         default:
+            {
+                /* Clear screen and draw emoji once when entering idle */
+                static uint8_t emoji_drawn = 0;
+                if (!emoji_drawn) {
+                    LCD_Fill(0, 0, 240, 240, BLACK);
+                    LCD_DrawEmoji(120, 120, 3);   /* center, size=3 */
+                    emoji_drawn = 1;
+                }
+            }
             /* Idle: 500ms delay to match original timing */
             delay_ms(500);
             break;

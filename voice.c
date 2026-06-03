@@ -161,15 +161,13 @@ uint8_t Voice_ReadCommand(void)
 
 
     /*
-     * 调试打印
+     * 调试打印 —— 仅在识别到有效指令时打印
      */
-
-    UART_SendString("RESULT = ");
-
-    UART_SendHex(result);
-
-    UART_SendString("\r\n");
-
+    if (result != VOICE_CMD_NONE) {
+        UART_SendString("[Voice] RESULT = 0x");
+        UART_SendHex(result);
+        UART_SendString("\r\n");
+    }
 
     return result;
 }

@@ -11,10 +11,10 @@ uint16_t ang(uint8_t a)
 /* Set all 4 servos by angle, matches motor/empty.c */
 void servo_set(uint8_t a0, uint8_t a1, uint8_t a2, uint8_t a3)
 {
-    DL_TimerG_setCaptureCompareValue(PWM_MOTOR2_INST, ang(a0), GPIO_PWM_MOTOR2_C0_IDX);//front_left
-    DL_TimerG_setCaptureCompareValue(PWM_MOTOR2_INST, ang(a1), GPIO_PWM_MOTOR2_C1_IDX);//front_right
-    DL_TimerG_setCaptureCompareValue(PWM_MOTOR2_INST, ang(a2), GPIO_PWM_MOTOR2_C2_IDX);//behind_left
-    DL_TimerG_setCaptureCompareValue(PWM_MOTOR2_INST, ang(a3), GPIO_PWM_MOTOR2_C3_IDX);//behind_right
+    DL_TimerG_setCaptureCompareValue(PWM_MOTOR2_INST, ang(a0), GPIO_PWM_MOTOR2_C1_IDX);//front_left  → PA22
+    DL_TimerG_setCaptureCompareValue(PWM_MOTOR2_INST, ang(a1), GPIO_PWM_MOTOR2_C3_IDX);//front_right → PA17
+    DL_TimerG_setCaptureCompareValue(PWM_MOTOR2_INST, ang(a2), GPIO_PWM_MOTOR2_C0_IDX);//behind_left → PA21
+    DL_TimerG_setCaptureCompareValue(PWM_MOTOR2_INST, ang(a3), GPIO_PWM_MOTOR2_C2_IDX);//behind_right→ PA15
 }
 
 /* Initialize: all servos to 90° (mid position) */

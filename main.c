@@ -18,7 +18,7 @@ typedef enum {
     ACTION_DANCE            /* Continuous dance gait */
 } ActionState_t;
 
-static ActionState_t current_action = ACTION_NONE;
+static ActionState_t current_action = ACTION_FORWARD;
 
 /* ================================================================
  *  UART character → voice command mapping
@@ -116,9 +116,11 @@ int main(void)
 
     /* Initialize motor: all servos to 90° mid position */
     servo_zero();
+    reset_gait();
+    LED_On();
     printf("[Servo] 4-channel servo PWM ready\r\n");
     printf("==========================================\r\n");
-    printf("  Lion Dance Robot Ready!\r\n");
+    printf("  Lion Dance Robot Ready! (default: FORWARD)\r\n");
     printf("  Command: Forward/Sit/Stand/Dance/Stop\r\n");
     printf("==========================================\r\n\r\n");
 

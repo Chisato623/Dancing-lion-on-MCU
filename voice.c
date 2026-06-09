@@ -138,6 +138,35 @@ uint8_t Voice_ReadCommand(void)
             DL_I2C_CONTROLLER_DIRECTION_RX,
             1);
 
+    /*
+     * Wait for transfer to complete before checking RXFIFO
+     */
+    timeout = 100000;
+
+    while(DL_I2C_getControllerStatus(I2C_0_INST)
+          & DL_I2C_CONTROLLER_STATUS_BUSY_BUS)
+    {
+        timeout--;
+
+        if(timeout == 0)
+        {
+            UART_SendString("RX BUSY TIMEOUT\r\n");
+
+            return VOICE_CMD_NONE;
+        }
+    }
+
+    /*
+     * Check for I2C error (NACK from CI1302)
+     */
+    if(DL_I2C_getControllerStatus(I2C_0_INST)
+       & DL_I2C_CONTROLLER_STATUS_ERROR)
+    {
+        UART_SendString("RX ERROR\r\n");
+
+        return VOICE_CMD_NONE;
+    }
+
     timeout = 1000000;
 
     while(DL_I2C_isControllerRXFIFOEmpty(I2C_0_INST))

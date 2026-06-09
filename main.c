@@ -142,6 +142,46 @@ int main(void)
             recv0_length = 0;
         }
 
+        /* ---- LCD emoji refresh ---- */
+        {
+            static uint8_t  last_action      = 0xFF;
+            static uint8_t  dance_frame      = 0;      /* 0: >w<, 1: Ow<, 2: >wO */
+            static uint16_t dance_counter    = 0;      /* loop-iteration counter */
+            #define DANCE_FRAME_LOOPS 22               /* 22 * ~15ms ≈ 333ms */
+
+            if (current_action != last_action) {
+                /* Redraw on action change */
+                LCD_Fill(0, 0, 240, 240, BLACK);
+                last_action   = current_action;
+                dance_frame   = 0;
+                dance_counter = 0;
+
+                if (current_action == ACTION_FORWARD) {
+                    LCD_DrawEmoji_O_O(120, 120, 3);
+                } else if (current_action == ACTION_DANCE) {
+                    LCD_DrawEmoji_gtwlt(120, 120, 3);
+                } else {
+                          LCD_DrawEmoji_dashwdash(120, 120, 3);
+                }
+            }
+            else if (current_action == ACTION_DANCE) {
+                /* Cycle dance frames every ~333ms */
+                dance_counter++;
+                if (dance_counter >= DANCE_FRAME_LOOPS) {
+                    dance_counter = 0;
+                    dance_frame++;
+                    if (dance_frame >= 3) dance_frame = 0;
+
+                    LCD_Fill(0, 0, 240, 240, BLACK);
+                    switch (dance_frame) {
+                    case 0: LCD_DrawEmoji_gtwlt(120, 120, 3); break;  /* >w< */
+                    case 1: LCD_DrawEmoji_Owlt(120, 120, 3); break;  /* Ow< */
+                    case 2: LCD_DrawEmoji_gtwO(120, 120, 3); break;  /* >wO */
+                    }
+                }
+            }
+        }
+
         /* ---- Continuous action stepping ---- */
         switch (current_action) {
         case ACTION_FORWARD:
@@ -152,15 +192,6 @@ int main(void)
             break;
         case ACTION_NONE:
         default:
-            {
-                /* Clear screen and draw emoji once when entering idle */
-                static uint8_t emoji_drawn = 0;
-                if (!emoji_drawn) {
-                    LCD_Fill(0, 0, 240, 240, BLACK);
-                    LCD_DrawEmoji(120, 120, 3);   /* center, size=3 */
-                    emoji_drawn = 1;
-                }
-            }
             /* Idle: 500ms delay to match original timing */
             delay_ms(500);
             break;

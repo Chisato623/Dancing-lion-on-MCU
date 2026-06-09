@@ -139,6 +139,12 @@ SYSCONFIG_WEAK void SYSCFG_DL_GPIO_init(void)
 
     DL_GPIO_initDigitalOutput(IN4_IN4_PIN_0_IOMUX);
 
+    DL_GPIO_initDigitalOutput(GPIO_LED_IOMUX);
+
+    DL_GPIO_initDigitalOutputFeatures(MP3_PIN_0_IOMUX,
+		 DL_GPIO_INVERSION_DISABLE, DL_GPIO_RESISTOR_NONE,
+		 DL_GPIO_DRIVE_STRENGTH_HIGH, DL_GPIO_HIZ_DISABLE);
+
     DL_GPIO_initDigitalOutput(LCD_SCL_IOMUX);
 
     DL_GPIO_initDigitalOutput(LCD_SDA_IOMUX);
@@ -155,26 +161,26 @@ SYSCONFIG_WEAK void SYSCFG_DL_GPIO_init(void)
 
     DL_GPIO_initDigitalOutput(LCD_BLK_IOMUX);
 
-    DL_GPIO_initDigitalOutput(GPIO_LED_IOMUX);
-
-    DL_GPIO_clearPins(GPIOA, LCD_CS1_PIN |
+    DL_GPIO_clearPins(GPIOA, GPIO_LED_PIN |
+		MP3_PIN_0_PIN |
+		LCD_CS1_PIN |
 		LCD_FSO_PIN |
-		LCD_BLK_PIN |
-		GPIO_LED_PIN);
+		LCD_BLK_PIN);
     DL_GPIO_setPins(GPIOA, LCD_SCL_PIN |
 		LCD_SDA_PIN |
 		LCD_RES_PIN |
 		LCD_DC_PIN |
 		LCD_CS2_PIN);
-    DL_GPIO_enableOutput(GPIOA, LCD_SCL_PIN |
+    DL_GPIO_enableOutput(GPIOA, GPIO_LED_PIN |
+		MP3_PIN_0_PIN |
+		LCD_SCL_PIN |
 		LCD_SDA_PIN |
 		LCD_RES_PIN |
 		LCD_DC_PIN |
 		LCD_CS2_PIN |
 		LCD_CS1_PIN |
 		LCD_FSO_PIN |
-		LCD_BLK_PIN |
-		GPIO_LED_PIN);
+		LCD_BLK_PIN);
     DL_GPIO_clearPins(GPIOB, IN2_IN2_PIN_0_PIN |
 		IN4_IN4_PIN_0_PIN);
     DL_GPIO_enableOutput(GPIOB, IN2_IN2_PIN_0_PIN |

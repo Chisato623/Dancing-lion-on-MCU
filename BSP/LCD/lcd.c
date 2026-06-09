@@ -688,3 +688,265 @@ void LCD_DrawEmoji(u16 x0, u16 y0, u8 size)
 			LCD_DrawLine(x1 + i, y1, x2 + i, y2, RED);
 	}
 }
+
+
+/******************************************************************************
+      函数说明：绘制O.O表情 (圆形大眼 + 中心点鼻子)
+      入口数据：x0,y0 表情中心坐标
+                size   表情缩放因子 (建议 2~5)
+      返回值：  无
+******************************************************************************/
+void LCD_DrawEmoji_O_O(u16 x0, u16 y0, u8 size)
+{
+	u16 i, eye_r, eye_gap, dot_r;
+
+	eye_r   = size * 5;       /* 圆形眼睛半径 */
+	eye_gap = size * 8;       /* 两眼间距 */
+
+	/* ---- 左眼：黄色实心圆 ---- */
+	for (i = 0; i <= eye_r; i++)
+		Draw_Circle(x0 - eye_gap, y0 - size * 2, (u8)i, YELLOW);
+
+	/* ---- 右眼：黄色实心圆 ---- */
+	for (i = 0; i <= eye_r; i++)
+		Draw_Circle(x0 + eye_gap, y0 - size * 2, (u8)i, YELLOW);
+
+	/* ---- 鼻子/嘴：中心小红点 (O.O的".") ---- */
+	dot_r = size + 1;
+	for (i = 0; i <= dot_r; i++)
+		Draw_Circle(x0, y0 + size * 6, (u8)i, RED);
+}
+
+
+/******************************************************************************
+      函数说明：绘制>w<表情 (>形眼 + w嘴 + <形眼)
+      入口数据：x0,y0 表情中心坐标
+                size   表情缩放因子 (建议 2~5)
+      返回值：  无
+******************************************************************************/
+void LCD_DrawEmoji_gtwlt(u16 x0, u16 y0, u8 size)
+{
+	u16 i, eye_len, eye_thick, eye_gap, mouth_w, mouth_h, x, y;
+
+	eye_len   = size * 10;    /* > < 斜线长度 */
+	eye_thick = size * 2;     /* 线条粗细 */
+	eye_gap   = size * 8;     /* 两眼间距 */
+	mouth_w   = size * 14;
+	mouth_h   = size * 5;
+
+	/* ---- 左眼 ">" (两条斜线组成箭头) ---- */
+	x = x0 - eye_gap - eye_len;
+	y = y0 - eye_len / 2;
+	for (i = 0; i < eye_thick; i++)
+	{
+		/* 上斜线: 左上→右下 (\) */
+		LCD_DrawLine(x, y, x + eye_len, y + eye_len, YELLOW);
+		/* 下斜线: 左下→右上 (/) */
+		LCD_DrawLine(x, y + eye_len * 2, x + eye_len, y + eye_len, YELLOW);
+		x++;
+	}
+
+	/* ---- 右眼 "<" (两条斜线组成箭头) ---- */
+	x = x0 + eye_gap;
+	for (i = 0; i < eye_thick; i++)
+	{
+		/* 上斜线: 右上→左下 (/) */
+		LCD_DrawLine(x + eye_len, y, x, y + eye_len, YELLOW);
+		/* 下斜线: 右下→左上 (\) */
+		LCD_DrawLine(x + eye_len, y + eye_len * 2, x, y + eye_len, YELLOW);
+		x++;
+	}
+
+	/* ---- 嘴巴："w" 形折线 ---- */
+	x  = x0 - mouth_w / 2;
+	y  = y0 + eye_len + size;
+	{
+		u16 x1, y1, x2, y2;
+
+		x1 = x;           y1 = y;
+		x2 = x + mouth_w/4; y2 = y + mouth_h;
+		for (i = 0; i < 3; i++) LCD_DrawLine(x1+i, y1, x2+i, y2, RED);
+
+		x1 = x2; y1 = y2;
+		x2 = x1 + mouth_w/4; y2 = y;
+		for (i = 0; i < 3; i++) LCD_DrawLine(x1+i, y1, x2+i, y2, RED);
+
+		x1 = x2; y1 = y2;
+		x2 = x1 + mouth_w/4; y2 = y + mouth_h;
+		for (i = 0; i < 3; i++) LCD_DrawLine(x1+i, y1, x2+i, y2, RED);
+
+		x1 = x2; y1 = y2;
+		x2 = x1 + mouth_w/4; y2 = y;
+		for (i = 0; i < 3; i++) LCD_DrawLine(x1+i, y1, x2+i, y2, RED);
+	}
+}
+
+
+/******************************************************************************
+      函数说明：绘制Ow<表情 (O圆眼 + w嘴 + <形眼)
+      入口数据：x0,y0 表情中心坐标
+                size   表情缩放因子 (建议 2~5)
+      返回值：  无
+******************************************************************************/
+void LCD_DrawEmoji_Owlt(u16 x0, u16 y0, u8 size)
+{
+	u16 i, eye_r, eye_gap, eye_len, eye_thick, mouth_w, mouth_h, x, y;
+
+	eye_r     = size * 5;     /* 左眼O圆半径 */
+	eye_len   = size * 10;    /* 右眼 < 斜线长度 */
+	eye_thick = size * 2;     /* 线条粗细 */
+	eye_gap   = size * 8;     /* 两眼间距 */
+	mouth_w   = size * 14;
+	mouth_h   = size * 5;
+
+	/* ---- 左眼：黄色实心圆 O ---- */
+	for (i = 0; i <= eye_r; i++)
+		Draw_Circle(x0 - eye_gap, y0 - size * 2, (u8)i, YELLOW);
+
+	/* ---- 右眼 "<" ---- */
+	x = x0 + eye_gap;
+	y = y0 - eye_len / 2;
+	for (i = 0; i < eye_thick; i++)
+	{
+		LCD_DrawLine(x + eye_len, y, x, y + eye_len, YELLOW);
+		LCD_DrawLine(x + eye_len, y + eye_len*2, x, y + eye_len, YELLOW);
+		x++;
+	}
+
+	/* ---- 嘴巴："w" 形折线 ---- */
+	x  = x0 - mouth_w / 2;
+	y  = y0 + size * 7;
+	{
+		u16 x1, y1, x2, y2;
+
+		x1 = x;           y1 = y;
+		x2 = x + mouth_w/4; y2 = y + mouth_h;
+		for (i = 0; i < 3; i++) LCD_DrawLine(x1+i, y1, x2+i, y2, RED);
+
+		x1 = x2; y1 = y2;
+		x2 = x1 + mouth_w/4; y2 = y;
+		for (i = 0; i < 3; i++) LCD_DrawLine(x1+i, y1, x2+i, y2, RED);
+
+		x1 = x2; y1 = y2;
+		x2 = x1 + mouth_w/4; y2 = y + mouth_h;
+		for (i = 0; i < 3; i++) LCD_DrawLine(x1+i, y1, x2+i, y2, RED);
+
+		x1 = x2; y1 = y2;
+		x2 = x1 + mouth_w/4; y2 = y;
+		for (i = 0; i < 3; i++) LCD_DrawLine(x1+i, y1, x2+i, y2, RED);
+	}
+}
+
+
+/******************************************************************************
+      函数说明：绘制>wO表情 (>形眼 + w嘴 + O圆眼)
+      入口数据：x0,y0 表情中心坐标
+                size   表情缩放因子 (建议 2~5)
+      返回值：  无
+******************************************************************************/
+void LCD_DrawEmoji_gtwO(u16 x0, u16 y0, u8 size)
+{
+	u16 i, eye_r, eye_gap, eye_len, eye_thick, mouth_w, mouth_h, x, y;
+
+	eye_r     = size * 5;
+	eye_len   = size * 10;
+	eye_thick = size * 2;
+	eye_gap   = size * 8;
+	mouth_w   = size * 14;
+	mouth_h   = size * 5;
+
+	/* ---- 左眼 ">" ---- */
+	x = x0 - eye_gap - eye_len;
+	y = y0 - eye_len / 2;
+	for (i = 0; i < eye_thick; i++)
+	{
+		LCD_DrawLine(x, y, x + eye_len, y + eye_len, YELLOW);
+		LCD_DrawLine(x, y + eye_len*2, x + eye_len, y + eye_len, YELLOW);
+		x++;
+	}
+
+	/* ---- 右眼：黄色实心圆 O ---- */
+	for (i = 0; i <= eye_r; i++)
+		Draw_Circle(x0 + eye_gap, y0 - size * 2, (u8)i, YELLOW);
+
+	/* ---- 嘴巴："w" 形折线 ---- */
+	x  = x0 - mouth_w / 2;
+	y  = y0 + size * 7;
+	{
+		u16 x1, y1, x2, y2;
+
+		x1 = x;           y1 = y;
+		x2 = x + mouth_w/4; y2 = y + mouth_h;
+		for (i = 0; i < 3; i++) LCD_DrawLine(x1+i, y1, x2+i, y2, RED);
+
+		x1 = x2; y1 = y2;
+		x2 = x1 + mouth_w/4; y2 = y;
+		for (i = 0; i < 3; i++) LCD_DrawLine(x1+i, y1, x2+i, y2, RED);
+
+		x1 = x2; y1 = y2;
+		x2 = x1 + mouth_w/4; y2 = y + mouth_h;
+		for (i = 0; i < 3; i++) LCD_DrawLine(x1+i, y1, x2+i, y2, RED);
+
+		x1 = x2; y1 = y2;
+		x2 = x1 + mouth_w/4; y2 = y;
+		for (i = 0; i < 3; i++) LCD_DrawLine(x1+i, y1, x2+i, y2, RED);
+	}
+}
+
+
+/******************************************************************************
+      函数说明：绘制-w-表情 (横线眼 + w嘴 + 横线眼)
+      入口数据：x0,y0 表情中心坐标
+                size   表情缩放因子 (建议 2~5)
+      返回值：  无
+******************************************************************************/
+void LCD_DrawEmoji_dashwdash(u16 x0, u16 y0, u8 size)
+{
+	u16 i, eye_w, eye_h, eye_gap, mouth_w, mouth_h, x, y;
+
+	eye_w    = size * 8;      /* 眼睛横线宽度 */
+	eye_h    = size * 2;      /* 眼睛线条粗细 */
+	eye_gap  = size * 8;      /* 两眼间距 */
+	mouth_w  = size * 14;
+	mouth_h  = size * 5;
+
+	/* ---- 左眼：水平粗线(多层叠加) ---- */
+	x = x0 - eye_gap - eye_w;
+	y = y0 - eye_w;
+	for (i = 0; i < eye_h; i++)
+	{
+		LCD_DrawLine(x,     y + i, x + eye_w, y + i, YELLOW);
+		LCD_DrawLine(x + 1, y + i, x + eye_w + 1, y + i, YELLOW);
+	}
+
+	/* ---- 右眼：水平粗线 ---- */
+	x = x0 + eye_gap;
+	for (i = 0; i < eye_h; i++)
+	{
+		LCD_DrawLine(x,     y + i, x + eye_w, y + i, YELLOW);
+		LCD_DrawLine(x + 1, y + i, x + eye_w + 1, y + i, YELLOW);
+	}
+
+	/* ---- 嘴巴："w" 形折线 ---- */
+	x  = x0 - mouth_w / 2;
+	y  = y0 + eye_w + size;
+	{
+		u16 x1, y1, x2, y2;
+
+		x1 = x;           y1 = y;
+		x2 = x + mouth_w/4; y2 = y + mouth_h;
+		for (i = 0; i < 3; i++) LCD_DrawLine(x1+i, y1, x2+i, y2, RED);
+
+		x1 = x2; y1 = y2;
+		x2 = x1 + mouth_w/4; y2 = y;
+		for (i = 0; i < 3; i++) LCD_DrawLine(x1+i, y1, x2+i, y2, RED);
+
+		x1 = x2; y1 = y2;
+		x2 = x1 + mouth_w/4; y2 = y + mouth_h;
+		for (i = 0; i < 3; i++) LCD_DrawLine(x1+i, y1, x2+i, y2, RED);
+
+		x1 = x2; y1 = y2;
+		x2 = x1 + mouth_w/4; y2 = y;
+		for (i = 0; i < 3; i++) LCD_DrawLine(x1+i, y1, x2+i, y2, RED);
+	}
+}

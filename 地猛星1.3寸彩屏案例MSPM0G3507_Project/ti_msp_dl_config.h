@@ -169,6 +169,18 @@ extern "C" {
 /* Defines for IN4_PIN_0: GPIOB.7 with pinCMx 24 on package pin 59 */
 #define IN4_IN4_PIN_0_PIN                                        (DL_GPIO_PIN_7)
 #define IN4_IN4_PIN_0_IOMUX                                      (IOMUX_PINCM24)
+/* Port definition for Pin Group GPIO */
+#define GPIO_PORT                                                        (GPIOA)
+
+/* Defines for LED: GPIOA.14 with pinCMx 36 on package pin 7 */
+#define GPIO_LED_PIN                                            (DL_GPIO_PIN_14)
+#define GPIO_LED_IOMUX                                           (IOMUX_PINCM36)
+/* Port definition for Pin Group MP3 */
+#define MP3_PORT                                                         (GPIOA)
+
+/* Defines for PIN_0: GPIOA.13 with pinCMx 35 on package pin 6 */
+#define MP3_PIN_0_PIN                                           (DL_GPIO_PIN_13)
+#define MP3_PIN_0_IOMUX                                          (IOMUX_PINCM35)
 /* Port definition for Pin Group LCD */
 #define LCD_PORT                                                         (GPIOA)
 
@@ -184,24 +196,18 @@ extern "C" {
 /* Defines for DC: GPIOA.24 with pinCMx 54 on package pin 25 */
 #define LCD_DC_PIN                                              (DL_GPIO_PIN_24)
 #define LCD_DC_IOMUX                                             (IOMUX_PINCM54)
-/* Defines for CS2: GPIOA.18 with pinCMx 40 on package pin 11 */
-#define LCD_CS2_PIN                                             (DL_GPIO_PIN_18)
-#define LCD_CS2_IOMUX                                            (IOMUX_PINCM40)
-/* Defines for CS1: GPIOA.16 with pinCMx 38 on package pin 9 */
-#define LCD_CS1_PIN                                             (DL_GPIO_PIN_16)
-#define LCD_CS1_IOMUX                                            (IOMUX_PINCM38)
-/* Defines for FSO: GPIOA.13 with pinCMx 35 on package pin 6 */
-#define LCD_FSO_PIN                                             (DL_GPIO_PIN_13)
-#define LCD_FSO_IOMUX                                            (IOMUX_PINCM35)
+/* Defines for CS2: GPIOA.23 with pinCMx 53 on package pin 24 */
+#define LCD_CS2_PIN                                             (DL_GPIO_PIN_23)
+#define LCD_CS2_IOMUX                                            (IOMUX_PINCM53)
+/* Defines for CS1: GPIOA.18 with pinCMx 40 on package pin 11 */
+#define LCD_CS1_PIN                                             (DL_GPIO_PIN_18)
+#define LCD_CS1_IOMUX                                            (IOMUX_PINCM40)
+/* Defines for FSO: GPIOA.16 with pinCMx 38 on package pin 9 */
+#define LCD_FSO_PIN                                             (DL_GPIO_PIN_16)
+#define LCD_FSO_IOMUX                                            (IOMUX_PINCM38)
 /* Defines for BLK: GPIOA.12 with pinCMx 34 on package pin 5 */
 #define LCD_BLK_PIN                                             (DL_GPIO_PIN_12)
 #define LCD_BLK_IOMUX                                            (IOMUX_PINCM34)
-/* Port definition for Pin Group GPIO */
-#define GPIO_PORT                                                        (GPIOA)
-
-/* Defines for LED: GPIOA.14 with pinCMx 36 on package pin 7 */
-#define GPIO_LED_PIN                                            (DL_GPIO_PIN_14)
-#define GPIO_LED_IOMUX                                           (IOMUX_PINCM36)
 
 
 

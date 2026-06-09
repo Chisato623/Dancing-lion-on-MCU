@@ -13,6 +13,7 @@ const GPIO1   = GPIO.addInstance();
 const GPIO2   = GPIO.addInstance();
 const GPIO3   = GPIO.addInstance();
 const GPIO4   = GPIO.addInstance();
+const GPIO5   = GPIO.addInstance();
 const I2C     = scripting.addModule("/ti/driverlib/I2C", {}, false);
 const I2C1    = I2C.addInstance();
 const PWM     = scripting.addModule("/ti/driverlib/PWM", {}, false);
@@ -65,6 +66,12 @@ GPIO3.associatedPins[0].pin.$assign = "PB7";
 GPIO4.$name                         = "GPIO";
 GPIO4.associatedPins[0].$name       = "LED";
 GPIO4.associatedPins[0].pin.$assign = "PA14";
+
+GPIO5.$name                           = "MP3";
+GPIO5.port                            = "PORTA";
+GPIO5.associatedPins[0].$name         = "PIN_0";
+GPIO5.associatedPins[0].driveStrength = "HIGH";
+GPIO5.associatedPins[0].pin.$assign   = "PA13";
 
 I2C1.$name                     = "I2C_0";
 I2C1.basicEnableController     = true;
@@ -145,9 +152,9 @@ UART1.rxPinConfig.$name        = "ti_driverlib_gpio_GPIOPinGeneric1";
  * version of the tool will not impact the pinmux you originally saw.  These lines can be completely deleted in order to
  * re-solve from scratch.
  */
-GPIO1.associatedPins[4].pin.$suggestSolution = "PA18";
-GPIO1.associatedPins[5].pin.$suggestSolution = "PA16";
-GPIO1.associatedPins[6].pin.$suggestSolution = "PA13";
+GPIO1.associatedPins[4].pin.$suggestSolution = "PA23";
+GPIO1.associatedPins[5].pin.$suggestSolution = "PA18";
+GPIO1.associatedPins[6].pin.$suggestSolution = "PA16";
 GPIO1.associatedPins[7].pin.$suggestSolution = "PA12";
 Board.peripheral.$suggestSolution            = "DEBUGSS";
 Board.peripheral.swclkPin.$suggestSolution   = "PA20";

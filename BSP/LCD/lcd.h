@@ -36,6 +36,11 @@ void LCD_ShowPicture(u16 x,u16 y,u16 length,u16 width,const u8 pic[]);//显示�
 
 void LCD_DrawWelcome(void);//绘制欢迎画面 "Dancing Lion on MCU"
 void LCD_DrawEmoji(u16 x0, u16 y0, u8 size);//绘制闭眼微笑表情 (眼=横线, 嘴=w形)
+void LCD_DrawEmoji_O_O(u16 x0, u16 y0, u8 size);//O.O 表情 (圆眼+点嘴)
+void LCD_DrawEmoji_gtwlt(u16 x0, u16 y0, u8 size);//>w< 表情 (>眼 w嘴 <眼)
+void LCD_DrawEmoji_Owlt(u16 x0, u16 y0, u8 size);//Ow< 表情 (O眼 w嘴 <眼)
+void LCD_DrawEmoji_gtwO(u16 x0, u16 y0, u8 size);//>wO 表情 (>眼 w嘴 O眼)
+void LCD_DrawEmoji_dashwdash(u16 x0, u16 y0, u8 size);//-w- 表情 (横线眼+w嘴)
 
 //字库函数
 void ZK_command(u8 dat);
@@ -73,8 +78,3 @@ void Display_TimesNewRoman_String(u16 x,u16 y,u16 zk_num,u8 text[],u16 fc,u16 bc
 #define LBBLUE           0X2B12 //浅棕蓝色(选择条目的反色)
 
 #endif
-
-
-
-
-

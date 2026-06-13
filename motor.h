@@ -14,7 +14,7 @@ void servo_set(uint8_t a0, uint8_t a1, uint8_t a2, uint8_t a3);
 /* Initialize: all servos to 90° mid position */
 void servo_zero(void);
 
-/* Sit pose: front 90°, rear 45° */
+/* Sit pose: front horizontal, rear vertical */
 void sit(void);
 
 /* Stand pose: all 90° */
@@ -23,7 +23,7 @@ void stand(void);
 /* Continuous walking gait (diagonal trot) - call per loop iteration */
 void robot_forward(void);
 
-/* Continuous dance gait - call per loop iteration */
+/* Continuous dance gait: rear sit pose, front legs alternate */
 void dance(void);
 
 /* Reset gait phase accumulator */

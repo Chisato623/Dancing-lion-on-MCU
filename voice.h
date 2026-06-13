@@ -9,7 +9,7 @@
 
 #define VOICE_CMD_FORWARD    0x01
 
-#define VOICE_CMD_SIT        0x0C
+#define VOICE_CMD_SIT   		 0x0C
 
 #define VOICE_CMD_STAND      0x0A
 
@@ -18,6 +18,15 @@
 #define VOICE_CMD_STOP       0x09
 
 void Voice_Init(void);
+
 uint8_t Voice_ReadCommand(void);
+
+uint8_t Voice_ClearCommand(void);
+
+uint8_t Voice_SpeakCommand(uint8_t id);
+
+uint8_t Voice_SpeakNormal(uint8_t id);
+
+uint8_t Voice_SetAddress(uint8_t newAddr);
 
 #endif

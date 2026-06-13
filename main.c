@@ -19,6 +19,41 @@ typedef enum {
 } ActionState_t;
 
 static ActionState_t current_action = ACTION_NONE;
+static uint8_t current_display_cmd = VOICE_CMD_NONE;
+
+static void MP3_SetDanceOutput(uint8_t enabled)
+{
+    if (enabled) {
+        DL_GPIO_setPins(MP3_PORT, MP3_PIN_0_PIN);
+    } else {
+        DL_GPIO_clearPins(MP3_PORT, MP3_PIN_0_PIN);
+    }
+}
+
+static void LCD_DrawCommandEmoji(uint8_t cmd)
+{
+    if (cmd == VOICE_CMD_NONE) {
+        return;
+    }
+
+    LCD_Fill(0, 0, 240, 240, BLACK);
+
+    if (cmd == VOICE_CMD_FORWARD) {
+        LCD_DrawEmoji_O_O(120, 120, 3);
+    } else if (cmd == VOICE_CMD_DANCE) {
+        LCD_DrawEmoji_gtwlt(120, 120, 3);
+    } else if (cmd == VOICE_CMD_WAKEUP) {
+        LCD_DrawEmoji(120, 120, 3);
+    } else if (cmd == VOICE_CMD_STAND) {
+        LCD_DrawEmoji_O_O(120, 120, 3);
+    } else if (cmd == VOICE_CMD_SIT) {
+        LCD_DrawEmoji_dashwdash(120, 120, 3);
+    } else if (cmd == VOICE_CMD_STOP) {
+        LCD_DrawEmoji_dashwdash(120, 120, 3);
+    } else {
+        LCD_DrawEmoji_dashwdash(120, 120, 3);
+    }
+}
 
 /* ================================================================
  *  UART character → voice command mapping
@@ -47,6 +82,8 @@ void ExecuteVoiceCommand(uint8_t cmd)
     case VOICE_CMD_FORWARD:
         printf("[Voice] CMD: FORWARD\r\n");
         LED_On();
+        MP3_SetDanceOutput(0);
+        current_display_cmd = cmd;
         reset_gait();
         current_action = ACTION_FORWARD;
         break;
@@ -54,6 +91,8 @@ void ExecuteVoiceCommand(uint8_t cmd)
     case VOICE_CMD_SIT:
         printf("[Voice] CMD: SIT\r\n");
         LED_On();
+        MP3_SetDanceOutput(0);
+        current_display_cmd = cmd;
         current_action = ACTION_NONE;
         sit();
         LED_Off();
@@ -62,6 +101,8 @@ void ExecuteVoiceCommand(uint8_t cmd)
     case VOICE_CMD_STAND:
         printf("[Voice] CMD: STAND\r\n");
         LED_On();
+        MP3_SetDanceOutput(0);
+        current_display_cmd = cmd;
         current_action = ACTION_NONE;
         stand();
         LED_Off();
@@ -70,6 +111,8 @@ void ExecuteVoiceCommand(uint8_t cmd)
     case VOICE_CMD_DANCE:
         printf("[Voice] CMD: DANCE\r\n");
         LED_On();
+        MP3_SetDanceOutput(1);
+        current_display_cmd = cmd;
         reset_gait();
         current_action = ACTION_DANCE;
         break;
@@ -77,6 +120,8 @@ void ExecuteVoiceCommand(uint8_t cmd)
     case VOICE_CMD_STOP:
         printf("[Voice] CMD: STOP\r\n");
         LED_Off();
+        MP3_SetDanceOutput(0);
+        current_display_cmd = cmd;
         current_action = ACTION_NONE;
         servo_zero();   /* all servos to mid position */
         break;
@@ -84,6 +129,8 @@ void ExecuteVoiceCommand(uint8_t cmd)
     case VOICE_CMD_WAKEUP:
         printf("[Voice] CMD: WAKEUP\r\n");
         LED_Flash();
+        MP3_SetDanceOutput(0);
+        current_display_cmd = cmd;
         current_action = ACTION_NONE;
         servo_zero();   /* all servos to mid position */
         break;
@@ -110,12 +157,15 @@ int main(void)
     Voice_Init();
     printf("[Voice] CI1302 voice module initialized\r\n");
 
+    MP3_SetDanceOutput(0);
+
     LED_Init();
     LED_Flash();
     printf("[LED] LED initialized on PA12\r\n");
 
     /* Initialize motor: all servos to 90° mid position */
     servo_zero();
+    reset_gait();
     printf("[Servo] 4-channel servo PWM ready\r\n");
     printf("==========================================\r\n");
     printf("  Lion Dance Robot Ready!\r\n");
@@ -144,27 +194,20 @@ int main(void)
 
         /* ---- LCD emoji refresh ---- */
         {
-            static uint8_t  last_action      = 0xFF;
+            static uint8_t  last_display_cmd = 0xFF;
             static uint8_t  dance_frame      = 0;      /* 0: >w<, 1: Ow<, 2: >wO */
             static uint16_t dance_counter    = 0;      /* loop-iteration counter */
             #define DANCE_FRAME_LOOPS 22               /* 22 * ~15ms ≈ 333ms */
 
-            if (current_action != last_action) {
-                /* Redraw on action change */
-                LCD_Fill(0, 0, 240, 240, BLACK);
-                last_action   = current_action;
-                dance_frame   = 0;
-                dance_counter = 0;
+            if (current_display_cmd != last_display_cmd) {
+                /* Redraw on command/display change */
+                last_display_cmd = current_display_cmd;
+                dance_frame      = 0;
+                dance_counter    = 0;
 
-                if (current_action == ACTION_FORWARD) {
-                    LCD_DrawEmoji_O_O(120, 120, 3);
-                } else if (current_action == ACTION_DANCE) {
-                    LCD_DrawEmoji_gtwlt(120, 120, 3);
-                } else {
-                          LCD_DrawEmoji_dashwdash(120, 120, 3);
-                }
+                LCD_DrawCommandEmoji(current_display_cmd);
             }
-            else if (current_action == ACTION_DANCE) {
+            else if (current_display_cmd == VOICE_CMD_DANCE) {
                 /* Cycle dance frames every ~333ms */
                 dance_counter++;
                 if (dance_counter >= DANCE_FRAME_LOOPS) {
@@ -192,8 +235,7 @@ int main(void)
             break;
         case ACTION_NONE:
         default:
-            /* Idle: 500ms delay to match original timing */
-            delay_ms(500);
+            delay_ms(30);
             break;
         }
     }

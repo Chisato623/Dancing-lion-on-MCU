@@ -714,7 +714,7 @@ void LCD_DrawEmoji_O_O(u16 x0, u16 y0, u8 size)
 	/* ---- 鼻子/嘴：中心小红点 (O.O的".") ---- */
 	dot_r = size + 1;
 	for (i = 0; i <= dot_r; i++)
-		Draw_Circle(x0, y0 + size * 6, (u8)i, RED);
+		Draw_Circle(x0, y0 + size * 8, (u8)i, RED);
 }
 
 
